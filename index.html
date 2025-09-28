@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The P-FIVE Project Framework</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: "Warm Neutrals" - A calm, focused palette using beige, tan, slate, and a gentle terracotta accent. -->
+    <!-- Application Structure Plan: A single-page application with a tab-based navigation. The main view introduces the 'P-FIVE' framework, a synthesized 5-step algorithm for project completion. Subsequent tabs apply this framework to specific, practical examples in Mathematics, Coding, Physics, and Chemistry. This structure was chosen for its clarity and didactic power. It first teaches the abstract algorithm and then reinforces it with concrete, parallel examples, allowing the user to easily compare how the same steps apply across different domains, which directly addresses the user's core request. The user can switch between the core concept and its applications without losing context. -->
+    <!-- Visualization & Content Choices: The core of the app is textual and structural. Instead of data charts, the 'visualization' is the layout itself: numbered steps, clear hierarchies, and consistent card-based layouts for each example. Report Info -> The user's need for a repeatable project algorithm. Goal -> Teach a memorable, practical framework. Viz/Presentation Method -> A 5-step interactive guide named 'P-FIVE'. Interaction -> Users click tabs to see the framework applied to different fields (Math, Code, etc.). Justification -> This reinforces the framework's universality and provides tangible starting points for a beginner. Library/Method -> Vanilla JS for tab switching, TailwindCSS for structure and styling. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8; /* Very light warm beige */
+            color: #4A4A4A;
+        }
+        .tab-active {
+            border-color: #E57373; /* Terracotta accent */
+            color: #E57373;
+            background-color: #FDFBF8;
+        }
+        .tab-inactive {
+            border-color: transparent;
+            color: #757575;
+        }
+        .content-card {
+            background-color: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .step-number {
+            background-color: #E57373;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        .pro-tip {
+            background-color: #FFF9C4; /* Light yellow */
+            border-left: 4px solid #FBC02D; /* Amber */
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto px-4 py-8 md:py-12">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800">The P-FIVE Framework</h1>
+            <p class="mt-3 text-lg text-gray-600 max-w-3xl mx-auto">Your algorithm for turning knowledge into successful, real-world projects. Perfect for your first project ever.</p>
+        </header>
+
+        <nav class="mb-8 border-b border-gray-200">
+            <ul class="flex flex-wrap -mb-px justify-center text-sm font-medium text-center">
+                <li class="mr-2">
+                    <button class="tab-btn inline-block p-4 border-b-2 rounded-t-lg tab-active" data-tab="framework">The Framework</button>
+                </li>
+                <li class="mr-2">
+                    <button class="tab-btn inline-block p-4 border-b-2 rounded-t-lg tab-inactive" data-tab="math">A) Mathematics</button>
+                </li>
+                <li class="mr-2">
+                    <button class="tab-btn inline-block p-4 border-b-2 rounded-t-lg tab-inactive" data-tab="coding">B) Coding</button>
+                </li>
+                <li class="mr-2">
+                    <button class="tab-btn inline-block p-4 border-b-2 rounded-t-lg tab-inactive" data-tab="physics">C) Physics</button>
+                </li>
+                 <li class="mr-2">
+                    <button class="tab-btn inline-block p-4 border-b-2 rounded-t-lg tab-inactive" data-tab="chemistry">D) Chemistry</button>
+                </li>
+            </ul>
+        </nav>
+
+        <main id="content-container">
+            <!-- Framework Content -->
+            <div id="framework" class="tab-content">
+                <div class="content-card p-6 md:p-8">
+                    <p class="text-center text-gray-600 mb-8">This is a simple, repeatable process designed to get you from a blank page to a finished project. It prevents overwhelm by breaking the journey into five manageable steps. Follow them in order, and you'll build momentum and increase your chances of success dramatically.</p>
+                    <div class="space-y-6">
+                        <!-- Step 1 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">1</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Pinpoint: Define the Goal</h3>
+                                <p class="mt-1 text-gray-600">This is the most critical step. Don't start with a vague idea like "learn math." Start with a tiny, specific, and exciting goal. Your project should be small enough to not be intimidating. Write a single sentence that defines success. This is your "Project Statement."</p>
+                                <div class="pro-tip">
+                                    <p><strong class="font-semibold">Pro Tip:</strong> Your first project's main goal is to *finish*, not to be perfect. Choose something you can realistically complete in a weekend or a week.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">2</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Plan: Create the Roadmap</h3>
+                                <p class="mt-1 text-gray-600">Break your Project Statement into the smallest possible tasks. Don't worry about how to do them yet, just list *what* needs to be done. Think of it as a recipe. This "to-do list" is your roadmap. It turns a big scary project into a series of simple, non-scary steps.</p>
+                                <div class="pro-tip">
+                                    <p><strong class="font-semibold">Pro Tip:</strong> Use a simple checklist app or a piece of paper. The physical act of checking off tasks is incredibly motivating.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">3</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Prototype: Build the First Version</h3>
+                                <p class="mt-1 text-gray-600">Focus only on the absolute core of your project. Build a "Minimum Viable Product" (MVP) – the simplest possible version that fulfills the basic goal. It will be ugly. It will be basic. That's the point. The goal here is to get *something* working and prove to yourself that it's possible.</p>
+                                <div class="pro-tip">
+                                    <p><strong class="font-semibold">Pro Tip:</strong> Fight the urge to add "cool features." Stick to your task list from Step 2. Getting a simple prototype working will give you a huge boost of confidence.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">4</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Perfect: Iterate and Refine</h3>
+                                <p class="mt-1 text-gray-600">Now that you have a working prototype, you can improve it. Go back to your task list and pick one small thing to add or fix. This is where the real learning happens. You'll solve small problems one by one, and your project will slowly transform from a clunky prototype into something polished.</p>
+                                <div class="pro-tip">
+                                    <p><strong class="font-semibold">Pro Tip:</strong> Work in short bursts. Add one feature or fix one bug, then step away. This prevents burnout and keeps the process fun.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Step 5 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">5</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Present: Share Your Work</h3>
+                                <p class="mt-1 text-gray-600">The project isn't truly done until you show it to someone. This doesn't mean it has to be a formal presentation. Write a simple blog post about it, show it to a friend, or post it on a forum. Explaining your project to others solidifies your understanding and gives you a sense of accomplishment.</p>
+                                <div class="pro-tip">
+                                    <p><strong class="font-semibold">Pro Tip:</strong> Document what you learned, what went wrong, and what you'd do differently next time. This "project retrospective" is invaluable for your growth.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Math Content -->
+            <div id="math" class="tab-content hidden">
+                <div class="content-card p-6 md:p-8">
+                    <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">Example Project: Interactive Monte Carlo Pi Estimation</h2>
+                    <p class="text-center text-gray-600 mb-8">Let's apply the P-FIVE framework to a classic mathematical concept to make it interactive and tangible.</p>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">1</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Pinpoint</h3>
+                                <p class="mt-1 text-gray-600"><strong class="font-medium text-gray-700">Project Statement:</strong> "I will build a visual web tool that estimates the value of Pi by randomly plotting points in a square and counting how many fall within an inscribed circle."</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">2</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Plan</h3>
+                                <ul class="list-disc list-inside mt-1 text-gray-600">
+                                    <li>Draw a square on the screen.</li>
+                                    <li>Draw a circle perfectly inside that square.</li>
+                                    <li>Create a function to generate a random point (x, y) inside the square.</li>
+                                    <li>Create a function to check if a point is inside the circle.</li>
+                                    <li>Create counters for total points and points inside the circle.</li>
+                                    <li>Write the formula to calculate Pi from the ratio of these counters.</li>
+                                    <li>Display the running estimate of Pi on the screen.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">3</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Prototype</h3>
+                                <p class="mt-1 text-gray-600">A static version. When the page loads, it runs the simulation for 1,000 points, draws them all at once, and displays a single, final calculation for Pi. No user interaction, no animation.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">4</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Perfect</h3>
+                                <p class="mt-1 text-gray-600">Make it interactive and dynamic. Add an animation loop that plots one point per frame and updates the Pi estimate in real-time. Color-code the points: green if inside the circle, red if outside. Add a button to "Reset" the simulation. Add a slider to control how many points are added per second.</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start space-x-4">
+                            <div class="step-number">5</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Present</h3>
+                                <p class="mt-1 text-gray-600">Host the interactive tool on a simple webpage. Below the tool, write a one-paragraph explanation of *why* this works, mentioning the relationship between the areas of the circle (πr²) and the square ((2r)²).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coding Content -->
+            <div id="coding" class="tab-content hidden">
+                 <div class="content-card p-6 md:p-8">
+                    <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">Example Project: Simple To-Do List Web App</h2>
+                    <p class="text-center text-gray-600 mb-8">A foundational project for any aspiring web developer. Let's walk it through P-FIVE.</p>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">1</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Pinpoint</h3>
+                                <p class="mt-1 text-gray-600"><strong class="font-medium text-gray-700">Project Statement:</strong> "I will build a single web page where a user can type a task into an input box, click a button to add it to a list, and click on a task to mark it as complete."</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">2</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Plan</h3>
+                                <ul class="list-disc list-inside mt-1 text-gray-600">
+                                    <li>Create the HTML structure: a text input, an "Add" button, and an empty list (`<ul>`).</li>
+                                    <li>Write JavaScript to select these three HTML elements.</li>
+                                    <li>Create an event listener for the "Add" button click.</li>
+                                    <li>Inside the listener, get the text from the input box.</li>
+                                    <li>Create a new list item (`<li>`) element with that text.</li>
+                                    <li>Append the new list item to the `<ul>`.</li>
+                                    <li>Create an event listener for clicks on the `<ul>` to handle marking tasks complete.</li>
+                                    <li>Write a CSS class that styles a completed task (e.g., with a line-through).</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">3</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Prototype</h3>
+                                <p class="mt-1 text-gray-600">The most basic functionality: adding tasks. The user can type a task and click "Add," and it appears on the list. No functionality for completing or deleting tasks yet. The input box doesn't even clear itself after adding a task.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">4</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Perfect</h3>
+                                <p class="mt-1 text-gray-600">Implement the 'mark as complete' functionality by toggling the CSS class. Add a small 'X' button to each task that allows it to be deleted. Clear the input box after a task is added. Store the to-do list in the browser's `localStorage` so the tasks persist even after the page is reloaded.</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start space-x-4">
+                            <div class="step-number">5</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Present</h3>
+                                <p class="mt-1 text-gray-600">Deploy the web app to a free hosting service like GitHub Pages or Netlify. Write a simple README file for the project, explaining what it is and the features you implemented (like `localStorage` persistence).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Physics Content -->
+            <div id="physics" class="tab-content hidden">
+                <div class="content-card p-6 md:p-8">
+                    <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">Example Project: Simple Pendulum Simulation</h2>
+                    <p class="text-center text-gray-600 mb-8">Visualize a fundamental physics concept in action using the P-FIVE framework.</p>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">1</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Pinpoint</h3>
+                                <p class="mt-1 text-gray-600"><strong class="font-medium text-gray-700">Project Statement:</strong> "I will create a 2D animated simulation that shows a pendulum bob swinging back and forth, governed by the basic physics equations for simple harmonic motion."</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">2</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Plan</h3>
+                                <ul class="list-disc list-inside mt-1 text-gray-600">
+                                    <li>Set up a drawing canvas (e.g., HTML canvas).</li>
+                                    <li>Define physics constants and variables: gravity, pendulum length, initial angle, angular velocity, angular acceleration.</li>
+                                    <li>Create an animation loop that runs continuously.</li>
+                                    <li>Inside the loop, calculate the angular acceleration using the formula: `a = (-g / L) * sin(θ)`.</li>
+                                    <li>Update the angular velocity based on the acceleration.</li>
+                                    <li>Update the angle (θ) based on the angular velocity.</li>
+                                    <li>Calculate the (x, y) coordinates of the pendulum bob from the angle and length.</li>
+                                    <li>Clear the canvas and redraw the pendulum (anchor point, string, bob) at its new position.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">3</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Prototype</h3>
+                                <p class="mt-1 text-gray-600">A basic, hard-coded animation. The pendulum swings, but the values for gravity and length are fixed in the code. The animation might be a bit jerky or not perfectly accurate, but it moves back and forth as expected.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">4</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Perfect</h3>
+                                <p class="mt-1 text-gray-600">Add UI elements. Create sliders that allow the user to change the length of the pendulum and the strength of gravity in real-time to see how it affects the period of the swing. Add a "damping" variable (to simulate air resistance) that makes the pendulum gradually slow down and stop. Display the current angle and velocity values on the screen.</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start space-x-4">
+                            <div class="step-number">5</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Present</h3>
+                                <p class="mt-1 text-gray-600">Embed the simulation in a webpage. Write a brief explanation of the key takeaway: that the period of a simple pendulum depends on its length and the local gravity, but not on its mass or the initial angle (for small angles).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Chemistry Content -->
+            <div id="chemistry" class="tab-content hidden">
+                <div class="content-card p-6 md:p-8">
+                    <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">Example Project: 3D Molecule Viewer</h2>
+                    <p class="text-center text-gray-600 mb-8">Bring abstract chemical structures to life with an interactive 3D modeler.</p>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">1</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Pinpoint</h3>
+                                <p class="mt-1 text-gray-600"><strong class="font-medium text-gray-700">Project Statement:</strong> "I will build a web-based tool using a 3D library that displays a 3D ball-and-stick model of a water molecule and allows the user to rotate it with their mouse."</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">2</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Plan</h3>
+                                <ul class="list-disc list-inside mt-1 text-gray-600">
+                                    <li>Choose and set up a 3D library like Three.js.</li>
+                                    <li>Create a basic 3D scene: a renderer, a camera, and lighting.</li>
+                                    <li>Look up the atomic coordinates for a water molecule (H₂O).</li>
+                                    <li>Create sphere shapes for the one oxygen and two hydrogen atoms.</li>
+                                    <li>Create cylinder shapes for the two bonds connecting them.</li>
+                                    <li>Position the atoms and bonds correctly in the 3D space.</li>
+                                    <li>Add a group to hold all the parts of the molecule together.</li>
+                                    <li>Implement mouse orbit controls to allow camera rotation around the molecule.</li>
+                                    <li>Create an animation loop to render the scene continuously.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">3</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Prototype</h3>
+                                <p class="mt-1 text-gray-600">A static, non-interactive 3D view of the water molecule. The molecule is visible on the screen from a single, fixed camera angle. The user can't rotate it or change anything. It just proves you can render a 3D object.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="step-number">4</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Perfect</h3>
+                                <p class="mt-1 text-gray-600">Implement the mouse rotation controls. Add a dropdown menu that allows the user to switch between different simple molecules (e.g., Water, Methane, Ammonia). When a new molecule is selected, clear the scene and load the new model. Improve the lighting and materials to make the model look more realistic. Add atom labels (O, H).</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start space-x-4">
+                            <div class="step-number">5</div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Present</h3>
+                                <p class="mt-1 text-gray-600">Host the 3D viewer online. For each molecule in the dropdown, add a short text description below the viewer that names its molecular geometry (e.g., "Water: Bent," "Methane: Tetrahedral") according to VSEPR theory.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab-btn');
+        const content = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.getAttribute('data-tab');
+
+                tabs.forEach(t => {
+                    t.classList.remove('tab-active');
+                    t.classList.add('tab-inactive');
+                });
+
+                tab.classList.add('tab-active');
+                tab.classList.remove('tab-inactive');
+
+                content.forEach(c => {
+                    c.classList.add('hidden');
+                });
+
+                document.getElementById(target).classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
